@@ -13,6 +13,7 @@ public class CalculadoraTestes
 
     [Theory]
     [InlineData (1,2,3)]
+    [InlineData (2,2,4)]
     public void TestedeSoma(int num1, int num2, int resultado)
     {
         var resultadoCalculadora = _calculadora.Somar(num1, num2);
@@ -58,6 +59,13 @@ public class CalculadoraTestes
 
     [Fact]
     public void TestedeHistorico(){
-        Assert.NotEmpty(_calculadora.Historico());
+        _calculadora.Somar(1,2);
+        _calculadora.Somar(3,2);
+        _calculadora.Somar(3,3);
+        _calculadora.Somar(5,2);
+
+        var lista = _calculadora.Historico();
+        Assert.NotEmpty(lista);
+        Assert.Equal(3, lista.Count);
     }
 }
